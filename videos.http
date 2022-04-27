@@ -1,0 +1,20 @@
+@api = http://localhost:5000
+
+GET {{api}}/videos
+
+###
+GET {{api}}/videos/1
+
+###
+POST {{api}}/video
+Content.Type: application/json
+
+{
+   "name": "carla" 
+}
+
+###
+DELETE {{api}}/videos/1
+
+###
+PUT {{api}}/videos/1
