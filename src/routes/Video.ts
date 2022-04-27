@@ -19,3 +19,5 @@ const videoSchema = new Schema({
     versionKey: false,
     timestamps: true
 })
+
+export default model('Video', videoSchema);
