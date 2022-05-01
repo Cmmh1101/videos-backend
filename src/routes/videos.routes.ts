@@ -5,9 +5,9 @@ import { signup, signin, profile} from './videos.controller'
 
 const router = Router();
 
-router.post('/signup', )
-router.post('/signin', )
-router.post('/profile', )
+router.post('/signup', signup )
+router.post('/signin', signin)
+router.get('/profile', profile)
 
 router.get('/videos', videoCtrl.getVideos);
 

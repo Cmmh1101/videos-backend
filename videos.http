@@ -1,6 +1,20 @@
-@api = http://localhost:5000
+@api = http://localhost:5000/api/auth
 
-GET {{api}}/videos
+POST {{api}}/signup 
+content-type: application/json
+
+{  
+ "username": "username1", 
+ "email": "carla1@gmail.com",  
+"password": "password6"
+}
+
+
+###
+POST {{api}}/signin
+
+###
+GET {{api}}/profile
 
 ###
 GET {{api}}/videos/62696addb675fdbf73fa7a99
@@ -10,7 +24,7 @@ POST {{api}}/videos HTTP/1.1
 content-type: application/json
 
 {
-   "url": "https://youtu.be/stBc8AfMkjc",
+   "url": "https://youtu.be/stBc8AfMkjcd",
    "title": "Title Test video",
     "description": "this is a test video"
 }

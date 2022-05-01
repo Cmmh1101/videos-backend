@@ -1,14 +1,23 @@
 import {RequestHandler} from 'express';
-import Video from './Video';
+import Video from '../models/Video';
+import User from '../models/User';
+import {IUser} from '../models/User';
 
-export const signup = () => {
+export const signup: RequestHandler = (req, res) => {
     
+    const user: IUser = new User({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    })
+    console.log(user)
+    res.send('sign up')
 }
-export const signin = () => {
-
+export const signin: RequestHandler = (req, res) => {
+res.send('signin')
 }
-export const profile = () => {
-
+export const profile: RequestHandler = (req, res) => {
+res.send('profile')
 }
 
 export const createVideo: RequestHandler = async (req, res) => {
