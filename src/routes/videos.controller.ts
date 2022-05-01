@@ -1,11 +1,20 @@
 import {RequestHandler} from 'express';
 import Video from './Video';
 
+export const signup = () => {
+    
+}
+export const signin = () => {
+
+}
+export const profile = () => {
+
+}
+
 export const createVideo: RequestHandler = async (req, res) => {
 const videoFound = await Video.findOne({url: req.body.url})
 if(videoFound) 
-        return res.status(301).json({message: 'The URL already exists, please enter a new URL'})
-
+    return res.status(301).json({message: 'The URL already exists, please enter a new URL'})
     const video = new Video(req.body)
     const savedVideo = await video.save()
     console.log(video)
@@ -18,7 +27,6 @@ const videos = await Video.find()
     } catch (error) {
         res.json(error)
     }
-    
 } 
 export const getVideo: RequestHandler = async (req, res) => {
     const videoFound = await Video.findById(req.params.id);

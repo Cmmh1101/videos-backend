@@ -1,8 +1,13 @@
 import {Router} from 'express';
 import * as videoCtrl from './videos.controller';
 
+import { signup, signin, profile} from './videos.controller'
+
 const router = Router();
 
+router.post('/signup', )
+router.post('/signin', )
+router.post('/profile', )
 
 router.get('/videos', videoCtrl.getVideos);
 
