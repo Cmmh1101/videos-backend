@@ -1,17 +1,25 @@
 import {RequestHandler} from 'express';
 import Video from '../models/Video';
-import User from '../models/User';
-import {IUser} from '../models/User';
+import User, {IUser} from '../models/User';
 
-export const signup: RequestHandler = (req, res) => {
-    
-    const user: IUser = new User({
+import jwt from 'jsonwebtoken';
+
+export const signup: RequestHandler = async (req, res) => {
+    // saving a new user
+    const user = new User({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password
-    })
-    console.log(user)
-    res.send('sign up')
+    });
+
+    // console.log(user)
+    // res.send('sign up')
+
+    const savedUser = await user.save();
+
+    // creating a token
+    const token:string = jwt.sign({_id: savedUser._id}, process.env.TOKEN_SECRET || "Tokentest" )
+    res.json(token)
 }
 export const signin: RequestHandler = (req, res) => {
 res.send('signin')
