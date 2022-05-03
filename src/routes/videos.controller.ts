@@ -1,4 +1,5 @@
-import {RequestHandler} from 'express';
+import {RequestHandler, Response} from 'express';
+import { Request } from '../../types'
 import Video from '../models/Video';
 import User, {IUser} from '../models/User';
 
@@ -12,20 +13,47 @@ export const signup: RequestHandler = async (req, res) => {
         password: req.body.password
     });
 
-    // console.log(user)
-    // res.send('sign up')
+    user.password = await user.encryptPassword(user.password)
 
     const savedUser = await user.save();
 
     // creating a token
-    const token:string = jwt.sign({_id: savedUser._id}, process.env.TOKEN_SECRET || "Tokentest" )
-    res.json(token)
+    const token:string = jwt.sign({_id: savedUser._id}, process.env.TOKEN_SECRET || "tokentest" )
+    res.header('auth-token', token).json(savedUser)
 }
-export const signin: RequestHandler = (req, res) => {
-res.send('signin')
+
+export const signin: RequestHandler = async (req, res) => {
+    const user = await User.findOne({email: req.body.email});
+    if (!user) return res.status(400).json('Email or password does not match out records. Try again');
+
+    const correctPassword: boolean = await user.validatePassword(req.body.password)
+    if(!correctPassword) return res.status(400).json('Invalid Password')
+
+    const token = jwt.sign(
+        {_id: user._id}, 
+        process.env.TOKEN_SECRET || 'tokentest',
+        {
+        expiresIn: 60 * 60 * 24
+        }
+    ) 
+
+    res.header('auth-token', token).json(user)
+
+    res.send('login')
 }
-export const profile: RequestHandler = (req, res) => {
+
+
+export const profile = async (req: Request, res: Response) => {
+   const user = await User.findById(req.userId);
+    if(!user) return res.status(404).json('No User Found');
+if(req.header('auth-token')) {
+console.log('data')
 res.send('profile')
+} else {
+res.json('no data found')
+}
+
+    
 }
 
 export const createVideo: RequestHandler = async (req, res) => {

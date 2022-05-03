@@ -4,19 +4,26 @@ POST {{api}}/signup HTTP/1.1
 content-type: application/json
 
 {  
- "username": "username2", 
- "email": "carlammh@gmail.com",  
+ "username": "username4", 
+ "email": "carlammh110@gmail.com",  
 "password": "password"
 }
 
 ###
 POST {{api}}/signin
+content-type: application/json
+
+{  
+ "email": "carlammh110@gmail.com",  
+"password": "password"
+}
 
 ###
 GET {{api}}/profile
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjcwMWRkZjkxNWE2NDFiYjVmMjVmYTciLCJpYXQiOjE2NTE1MjUzNDcsImV4cCI6MTY1MTYxMTc0N30.1HBurnvh9Urnf74RT0cJKLYOje46K155Hr46GaxeSyc
 
 ###
-GET {{api}}/videos/62696addb675fdbf73fa7a99
+GET {{api}}/videos
 
 ###
 POST {{api}}/videos HTTP/1.1
@@ -32,9 +39,10 @@ content-type: application/json
 DELETE {{api}}/videos/626962e54ac5d582f08f1cbd
 
 ###
-PUT {{api}}/videos/62696addb675fdbf73fa7a99 HTTP/1.1
+PUT {{api}}/videos/627009d38d16370574452e5c HTTP/1.1
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjcwMWRkZjkxNWE2NDFiYjVmMjVmYTciLCJpYXQiOjE2NTE1MjUzNDcsImV4cCI6MTY1MTYxMTc0N30.1HBurnvh9Urnf74RT0cJKLYOje46K155Hr46GaxeSyc
 Content-Type: application/json
 
 {
-    "title": "updated title"
+    "title": "new updated room management 2"
 }
