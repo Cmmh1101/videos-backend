@@ -1,5 +1,4 @@
-import {RequestHandler, Response} from 'express';
-import { Request } from '../../types'
+import {RequestHandler} from 'express';
 import Video from '../models/Video';
 import User, {IUser} from '../models/User';
 
@@ -30,12 +29,9 @@ export const signin: RequestHandler = async (req, res) => {
     if(!correctPassword) return res.status(400).json('Invalid Password')
 
     const token = jwt.sign(
-        {_id: user._id}, 
-        process.env.TOKEN_SECRET || 'tokentest',
-        {
+        {_id: user._id}, process.env.TOKEN_SECRET || 'tokentest', {
         expiresIn: 60 * 60 * 24
-        }
-    ) 
+    }) 
 
     res.header('auth-token', token).json(user)
 
@@ -43,9 +39,9 @@ export const signin: RequestHandler = async (req, res) => {
 }
 
 
-export const profile = async (req: Request, res: Response) => {
-   const user = await User.findById(req.userId);
-    if(!user) return res.status(404).json('No User Found');
+export const profile: RequestHandler = async (req, res) => {
+//    const user = await User.findById(req.userId);
+//     if(!user) return res.status(404).json('No User Found');
 if(req.header('auth-token')) {
 console.log('data')
 res.send('profile')

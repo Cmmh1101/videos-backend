@@ -1,7 +1,5 @@
-import { Response, NextFunction, RequestHandler} from 'express'
+import {Request, Response, NextFunction, RequestHandler} from 'express'
 import jwt from 'jsonwebtoken'
-import { Request } from "../../types";
-
 
 interface IPayload {
     _id: string;
@@ -9,15 +7,22 @@ interface IPayload {
     exp: number;
 }
 
-export const TokenValidation = async (req: Request, res: Response, next: NextFunction) => {
+export const TokenValidation= async (req, res, next) => {
     const token = req.header('auth-token');
     if(!token) {return res.status(401).json('Access denided')}
+
+
     try {
-        const payload = jwt.verify(token, process.env.TOKEN_SECRET || 'tokentest')
+        const payload = await jwt.verify(token, process.env.TOKEN_SECRET || 'tokentest')
         req.userId = payload
-        console.log(req.userId)
+        console.log(payload)
     } catch(err) {
         return res.status(400).json("Token invalid")
     }
+    
+
+//     const payload = jwt.verify(token, process.env.TOKEN_SECRET || 'tokentest') as IPayload
+// console.log(payload)
+
     next();    
 }

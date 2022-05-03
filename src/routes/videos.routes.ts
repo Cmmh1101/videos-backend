@@ -3,18 +3,18 @@ import * as videoCtrl from './videos.controller';
 
 import {TokenValidation} from '../libs/verifyToken'
 
-// import { signup, signin, profile} from './videos.controller'
+import { signup, signin, profile} from './videos.controller'
 
 const router = Router();
 
 
-router.post('/signin', videoCtrl.signin)
+router.post('/signin', signin)
 
 router.get('/videos', videoCtrl.getVideos);
 
 // routs that need auth to access
 
-router.post('/signup', videoCtrl.signup )
+router.post('/signup', signup )
 
 router.get('/profile', TokenValidation, videoCtrl.profile)
 
