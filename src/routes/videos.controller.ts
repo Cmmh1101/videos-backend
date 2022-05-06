@@ -2,6 +2,7 @@ import {RequestHandler} from 'express';
 import Video from '../models/Video';
 import User, {IUser} from '../models/User';
 
+
 import jwt from 'jsonwebtoken';
 
 export const signup: RequestHandler = async (req, res) => {
